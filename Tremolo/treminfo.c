@@ -279,7 +279,7 @@ int _vorbis_unpack_books(vorbis_info *vi,oggpack_buffer *opb){
 
   /* map backend settings */
   ci->maps=oggpack_read(opb,6)+1;
-  ci->map_param=_ogg_malloc(sizeof(*ci->map_param)*ci->maps);
+  ci->map_param=_ogg_calloc(ci->maps,sizeof(*ci->map_param));
   for(i=0;i<ci->maps;i++){
     if(oggpack_read(opb,16)!=0)goto err_out;
     if(mapping_info_unpack(ci->map_param+i,vi,opb))goto err_out;
